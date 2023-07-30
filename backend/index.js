@@ -1,16 +1,16 @@
-const express = require('express');
-const dotenv = require('dotenv').config();
+const express = require("express");
+const dotenv = require("dotenv").config();
 const port = process.env.PORT || 3000;
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
 
 connectDB();
 
 const app = express();
 
-app.use('/api/languages', require('./routes/languageRoutes'));
-app.use('/api/books', require('./routes/bookRoutes'));
-app.use('/api/types', require('./routes/typesRoutes'));
-app.use('/api/mvmts&chaps', require('./routes/mvmts&chapsRoutes'));
+app.use("/api/languages", require("./routes/languageRoutes"));
+app.use("/api/books", require("./routes/bookRoutes"));
+app.use("/api/types", require("./routes/typesRoutes"));
+app.use("/api/mvmts&chaps", require("./routes/mvmts&chapsRoutes"));
 // app.use('/api/books', require(''))
 
 app.listen(port, () => {

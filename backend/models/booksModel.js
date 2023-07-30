@@ -1,24 +1,25 @@
-const mongoose = require('mongoose');
-
-const languageNameSchema = mongoose.Schema({
-
-    languageName: {
-        
-        type: String
-    }
-})
+const mongoose = require("mongoose");
+const languageSchema = require("./languageModel");
+const typeSchema = require("./typeModel");
 const bookSchema = mongoose.Schema({
-   
-    name: {
-
-        type: String
+  name: {
+    type: String,
+  },
+  languages: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: languageSchema.collection.name,
+      required: true,
     },
-    languages: [languageNameSchema],
+  ],
 
-    typeName: {
+  type: {
+    type: mongoose.Types.ObjectId,
+    ref: typeSchema.collection.name,
+    required: true,
+  },
+});
 
-        type: String
-    }
-})
+module.exports = mongoose.model("books", bookSchema);
 
-module.exports = mongoose.model('books', bookSchema);
+// module.exports = mongoose.model("books", bookSchema).find({}).populate("languages").exec().then();
