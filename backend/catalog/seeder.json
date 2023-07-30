@@ -1,0 +1,41 @@
+{
+  "languages": ["en", "fr", "it"],
+  "types": ["structured", "traditional"],
+  "books": [
+    {
+      "name": "genesis",
+      "language": ["en", "fr", "it"],
+      "type": "structured"
+    },
+    {
+      "name": "luke",
+      "language": ["en", "fr", "it"],
+      "type": "structured"
+    },
+    {
+      "name": "psalms",
+      "language": ["en", "fr", "it"],
+      "type": "traditional"
+    }
+  ],
+  "movementChap": [
+    {
+      "name": "movement1",
+      "bookName": "genesis",
+      "type": "structured",
+      "languages": ["en", "fr", "it"]
+    },
+    {
+      "name": "movement2",
+      "bookName": "genesis",
+      "type": "structured",
+      "languages": ["en", "fr", "it"]
+    },
+    {
+      "name": "chapter1",
+      "bookName": "genesis",
+      "type": "traditional",
+      "languages": ["en", "fr", "it"]
+    }
+  ]
+}

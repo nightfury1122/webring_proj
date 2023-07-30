@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon backend/index.js"
+    "dev": "nodemon backend/index.js",
+    "seed": "node backend/catalog/seeder.js"
   },
   "author": "Hassan Imam",
   "license": "ISC",

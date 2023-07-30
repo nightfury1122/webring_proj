@@ -1,7 +1,12 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {getBooks}=require('../contollers/booksController');
-
-router.get('/', getBooks);
+const {
+  getBooksByLanguage,
+  getBooks,
+  getBooksByType,
+} = require("../contollers/booksController");
+router.get("/", getBooks);
+router.get("/byLanguage", getBooksByLanguage);
+router.get("/byType", getBooksByType);
 
 module.exports = router;
