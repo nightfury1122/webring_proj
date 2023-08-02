@@ -1,9 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const {
-  ChaptersModel,
-  BooksModel,
-  LanguageModel,
-} = require("../models/index");
+const { ChaptersModel, BooksModel, LanguageModel } = require("../models/index");
 const booksModel = require("../models/booksModel");
 const languageModel = require("../models/languageModel");
 
@@ -101,8 +97,8 @@ const getChaptersByLanguageAndBook = asyncHandler(async (req, res) => {
     return [];
   }
 
-  const bookParam = req.query.book.trim();
-  const book = await BooksModel.find({ bookName: bookParam });
+  const bookParam = req.query.bookId.trim();
+  const book = await BooksModel.find({ _id: bookParam });
   if (!book) {
     return [];
   }
@@ -110,14 +106,22 @@ const getChaptersByLanguageAndBook = asyncHandler(async (req, res) => {
     languages: language[0]._id,
     book: book[0]._id,
   });
-  if (result === 0) {
-    res.status(404).json({ error: "no chapters !" });
+  let resp = {};
+  if (result.length === 0) {
+    resp = {
+      status: false,
+      data: [],
+    };
+    res.status(404).json(resp);
   } else {
-    const resp = result.map((chap) => ({
-      chapterId: chap._id,
-      chapterName: chap.chapterName,
-      chapterImage: chap.chapterImage,
-    }));
+    resp = {
+      status: true,
+      data: result.map((chap) => ({
+        chapterId: chap._id,
+        chapterName: chap.chapterName,
+        chapterImage: chap.chapterImage,
+      })),
+    };
     res.status(200).json(resp);
   }
 });

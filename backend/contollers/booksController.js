@@ -8,15 +8,23 @@ const typeModel = require("../models/typeModel");
 
 const getBooks = asyncHandler(async (req, res) => {
   const result = await booksModel.find();
+  let resp = {};
   if (result.length === 0) {
-    res.status(404).json({ error: "no books found !" });
+    resp ={
+      status :false,
+      data :[]
+    }
+    res.status(404).json(resp);
   } else {
     // const resp = result.map((book) => book.name);
-    const resp = result.map((book) => ({
-      bookId: book._id,
-      bookName: book.bookName,
-      bookImage: book.bookImage,
-    }));
+     resp = {
+      status : true,
+      data:result.map((book) => ({
+        bookId: book._id,
+        bookName: book.bookName,
+        bookImage: book.bookImage,
+      }))
+    }
     res.status(200).json(resp);
   }
 });
@@ -86,15 +94,22 @@ const getBooksByTypeAndLanguage = asyncHandler(async (req, res) => {
     type: type[0]._id,
     languages: language[0]._id,
   });
-
+  let resp = {};
   if (result.length === 0) {
-    res.status(404).json({ error: "No books found !" });
+    resp = {
+      status: false,
+      data: [],
+    };
+    res.status(404).json(resp);
   } else {
-    const resp = result.map((book) => ({
-      bookId: book._id,
-      bookName: book.bookName,
-      bookImage: book.bookImage,
-    }));
+    resp = {
+      status: true,
+      data: result.map((book) => ({
+        bookId: book._id,
+        bookName: book.bookName,
+        bookImage: book.bookImage,
+      })),
+    };
     res.status(200).json(resp);
   }
 });
