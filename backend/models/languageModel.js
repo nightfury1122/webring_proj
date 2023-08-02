@@ -2,11 +2,16 @@ const mongoose = require("mongoose");
 
 const languageSchema = mongoose.Schema(
   {
-    name: {
+    languageName: {
+      type: String,
+    },
+    languageCode: {
+      type: String,
+    },
+    flagImage: {
       type: String,
     },
   },
-
   {
     timestamps: true,
   }

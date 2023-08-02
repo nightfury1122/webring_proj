@@ -3,8 +3,11 @@ const languageSchema = require("./languageModel");
 const typeSchema = require("./typeModel");
 const bookSchema = require("./booksModel");
 
-const mvmtsChapsSchema = mongoose.Schema({
-  name: {
+const chapterSchema = mongoose.Schema({
+  chapterName: {
+    type: String,
+  },
+  chapterImage: {
     type: String,
   },
   book: {
@@ -12,12 +15,6 @@ const mvmtsChapsSchema = mongoose.Schema({
     ref: bookSchema.collection.name,
     required: true,
   },
-  type: {
-    type: mongoose.Types.ObjectId,
-    ref: typeSchema.collection.name,
-    required: true,
-  },
-
   languages: [
     {
       type: mongoose.Types.ObjectId,
@@ -27,4 +24,4 @@ const mvmtsChapsSchema = mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("mvmtsChaps", mvmtsChapsSchema);
+module.exports = mongoose.model("chapters", chapterSchema);

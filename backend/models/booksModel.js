@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const languageSchema = require("./languageModel");
 const typeSchema = require("./typeModel");
 const bookSchema = mongoose.Schema({
-  name: {
+  bookName: {
+    type: String,
+  },
+
+  bookImage: {
     type: String,
   },
   languages: [
