@@ -3,6 +3,5 @@ module.exports = {
   BooksModel: require("./booksModel"),
   TypesModel: require("./typeModel"),
   MovementsModel: require("./movementModel"),
-  ChaptersModel: require("./chapterModel")
-
+  ChaptersModel: require("./chapterModel"),
 };
