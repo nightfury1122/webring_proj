@@ -80,8 +80,8 @@ const getMovementByLanguageAndBook = asyncHandler(async (req, res) => {
     return [];
   }
 
-  const bookParam = req.query.book.trim();
-  const book = await BooksModel.find({ bookName: bookParam });
+  const bookParam = req.query.bookId.trim();
+  const book = await BooksModel.find({ _id: bookParam });
   if (!book) {
     return [];
   }
@@ -89,14 +89,22 @@ const getMovementByLanguageAndBook = asyncHandler(async (req, res) => {
     languages: language[0]._id,
     book: book[0]._id,
   });
-  if (result === 0) {
-    res.status(404).json({ error: "no movements !" });
+  let resp = {};
+  if (result.length === 0) {
+    resp = {
+      status: false,
+      data: [],
+    };
+    res.status(404).json(resp);
   } else {
-    const resp = result.map((mov) => ({
-      movementId: mov._id,
-      movementName: mov.movementName,
-      movementImage: mov.movementImage,
-    }));
+    resp = {
+      status: true,
+      data: result.map((mov) => ({
+        movementId: mov._id,
+        movementName: mov.movementName,
+        movementImage: mov.movementImage,
+      })),
+    };
     res.status(200).json(resp);
   }
 });
