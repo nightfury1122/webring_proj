@@ -11,7 +11,6 @@ const {
 router.get("/", getMovements);
 router.get("/byBook", getMovementByBook);
 router.get("/byLanguage", getMovementByLanguage);
-router.get("/byType", getMovementByType);
 router.get("/byLanguageAndBook", getMovementByLanguageAndBook);
 
 module.exports = router;

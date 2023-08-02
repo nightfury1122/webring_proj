@@ -3,7 +3,6 @@ const {
   ChaptersModel,
   BooksModel,
   LanguageModel,
-  TypesModel,
 } = require("../models/index");
 const booksModel = require("../models/booksModel");
 const languageModel = require("../models/languageModel");
@@ -17,10 +16,10 @@ const getChapters = asyncHandler(async (req, res) => {
     res.status(404).json({ error: "No chapters !" });
   } else {
     const resp = result.map((chap) => ({
-        chapterId: chap._id,
-        chapterName: chap.chapterName,
-        chapterImage: chap.chapterImage,
-      }));
+      chapterId: chap._id,
+      chapterName: chap.chapterName,
+      chapterImage: chap.chapterImage,
+    }));
     res.status(200).json(resp);
   }
 });
@@ -30,20 +29,20 @@ const getChapters = asyncHandler(async (req, res) => {
 
 const getChaptersByBook = asyncHandler(async (req, res) => {
   const bookParam = req.query.book.trim();
-  const book = await BooksModel.find({ name: bookParam });
+  const book = await BooksModel.find({ bookName: bookParam });
   if (!book) {
     return [];
   }
 
-  const result = await movementsModel.find({ book: book[0]._id });
+  const result = await ChaptersModel.find({ book: book[0]._id });
   if (result === 0) {
     res.status(404).json({ error: "no chapters !" });
   } else {
     const resp = result.map((chap) => ({
-        chapterId: chap._id,
-        chapterName: chap.chapterName,
-        chapterImage: chap.chapterImage,
-      }));
+      chapterId: chap._id,
+      chapterName: chap.chapterName,
+      chapterImage: chap.chapterImage,
+    }));
     res.status(200).json(resp);
   }
 });
@@ -53,7 +52,7 @@ const getChaptersByBook = asyncHandler(async (req, res) => {
 
 const getChaptersByLanguage = asyncHandler(async (req, res) => {
   const languageParam = req.query.language.trim();
-  const language = await LanguageModel.find({ name: languageParam });
+  const language = await LanguageModel.find({ languageCode: languageParam });
   if (!language) {
     return [];
   }
@@ -63,10 +62,10 @@ const getChaptersByLanguage = asyncHandler(async (req, res) => {
     res.status(404).json({ error: "no chapters !" });
   } else {
     const resp = result.map((chap) => ({
-        chapterId: chap._id,
-        chapterName: chap.chapterName,
-        chapterImage: chap.chapterImage,
-      }));
+      chapterId: chap._id,
+      chapterName: chap.chapterName,
+      chapterImage: chap.chapterImage,
+    }));
     res.status(200).json(resp);
   }
 });
@@ -86,17 +85,17 @@ const getChapterByType = asyncHandler(async (req, res) => {
     res.status(404).json({ error: "no chapters !" });
   } else {
     const resp = result.map((chap) => ({
-        chapterId: chap._id,
-        chapterName: chap.chapterName,
-        chapterImage: chap.chapterImage,
-      }));
+      chapterId: chap._id,
+      chapterName: chap.chapterName,
+      chapterImage: chap.chapterImage,
+    }));
     res.status(200).json(resp);
   }
 });
 // @desc this controller is getting the available movements and chapters by language and book search
 // @desc GET /api/mvmts&chaps
 const getChaptersByLanguageAndBook = asyncHandler(async (req, res) => {
-  const languageParam = req.query.languages.trim();
+  const languageParam = req.query.language.trim();
   const language = await LanguageModel.find({ languageCode: languageParam });
   if (!language) {
     return [];
