@@ -22,6 +22,14 @@ const bookSchema = mongoose.Schema({
     ref: typeSchema.collection.name,
     required: true,
   },
+  isNew: {
+    type: Boolean,
+    default: false,
+  },
+  isUpdated: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 module.exports = mongoose.model("books", bookSchema);

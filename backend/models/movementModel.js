@@ -22,6 +22,14 @@ const movementsSchema = mongoose.Schema({
       required: true,
     },
   ],
+  isNew: {
+    type: Boolean,
+    default: false,
+  },
+  isUpdated: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 module.exports = mongoose.model("movements", movementsSchema);
