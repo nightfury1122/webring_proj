@@ -10,21 +10,21 @@ const getBooks = asyncHandler(async (req, res) => {
   const result = await booksModel.find();
   let resp = {};
   if (result.length === 0) {
-    resp ={
-      status :false,
-      data :[]
-    }
+    resp = {
+      status: false,
+      data: [],
+    };
     res.status(404).json(resp);
   } else {
     // const resp = result.map((book) => book.name);
-     resp = {
-      status : true,
-      data:result.map((book) => ({
+    resp = {
+      status: true,
+      data: result.map((book) => ({
         bookId: book._id,
         bookName: book.bookName,
         bookImage: book.bookImage,
-      }))
-    }
+      })),
+    };
     res.status(200).json(resp);
   }
 });
@@ -108,6 +108,8 @@ const getBooksByTypeAndLanguage = asyncHandler(async (req, res) => {
         bookId: book._id,
         bookName: book.bookName,
         bookImage: book.bookImage,
+        isNew: book.isNew,
+        isUpdated: book.isUpdated,
       })),
     };
     res.status(200).json(resp);

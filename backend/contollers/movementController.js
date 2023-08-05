@@ -103,6 +103,8 @@ const getMovementByLanguageAndBook = asyncHandler(async (req, res) => {
         movementId: mov._id,
         movementName: mov.movementName,
         movementImage: mov.movementImage,
+        isNew: mov.isNew,
+        isUpdated: mov.isUpdated,
       })),
     };
     res.status(200).json(resp);
