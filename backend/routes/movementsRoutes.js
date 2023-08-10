@@ -6,11 +6,13 @@ const {
   getMovementByLanguage,
   getMovementByType,
   getMovementByLanguageAndBook,
+  movementAudios
 } = require("../contollers/movementController");
 
 router.get("/", getMovements);
 router.get("/byBook", getMovementByBook);
 router.get("/byLanguage", getMovementByLanguage);
 router.get("/byLanguageAndBook", getMovementByLanguageAndBook);
+router.get("/api/getMovementAudios", movementAudios)
 
 module.exports = router;
