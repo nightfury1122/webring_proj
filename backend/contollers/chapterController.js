@@ -174,6 +174,8 @@ const chapterAudios = asyncHandler(async (req, res, next) => {
         rationalAudioFileURL: aud.rationalAudioURL,
         explanationAudioFileURL: aud.explanationAudioURL,
         devotionalAudioFileURL: aud.devotionalAudioURL,
+        introsAudioFileURL: aud.introsAudioURL,
+
       })),
     };
     res.status(200).json(resp);

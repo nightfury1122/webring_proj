@@ -5,5 +5,5 @@ module.exports = {
   MovementsModel: require("./movementModel"),
   ChaptersModel: require("./chapterModel"),
   movAudioModel: require("./movementAudiosModel"),
-  chapAudioModel:require("./chapterAudiosModel")
+  chapAudioModel: require("./chapterAudiosModel"),
 };
