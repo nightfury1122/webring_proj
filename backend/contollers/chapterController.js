@@ -1,5 +1,10 @@
 const asyncHandler = require("express-async-handler");
-const { ChaptersModel, BooksModel, LanguageModel } = require("../models/index");
+const {
+  ChaptersModel,
+  BooksModel,
+  LanguageModel,
+  chapAudioModel,
+} = require("../models/index");
 const booksModel = require("../models/booksModel");
 const languageModel = require("../models/languageModel");
 
@@ -125,10 +130,60 @@ const getChaptersByLanguageAndBook = asyncHandler(async (req, res) => {
     res.status(200).json(resp);
   }
 });
+
+const chapterAudios = asyncHandler(async (req, res, next) => {
+  const chapterIdParam = req.query.chapter_id.trim();
+
+  if (!chapterIdParam) {
+    return res
+      .status(400)
+      .json({ message: "chaptertId query param is required" });
+  }
+  const chapter_id = await ChaptersModel.find({ _id: chapterIdParam });
+  const languageParam = req.query.language.trim();
+  if (!languageParam) {
+    return res
+      .status(400)
+      .json({ message: "Language query param is required" });
+  }
+  const language = await LanguageModel.find({ languageCode: languageParam });
+  const result = await chapAudioModel.find({
+    chapters: chapter_id[0]._id,
+    languages: language[0]._id,
+  });
+  let resp = {};
+  if (result.length === 0) {
+    resp = {
+      status: false,
+      data: [],
+    };
+    res.status(404).json(resp);
+  } else {
+    resp = {
+      status: true,
+      data: result.map((aud) => ({
+        audioId: aud._id,
+        audioName: aud.audioName,
+        audioImage: aud.audioImage,
+        mainAudioFile: aud.mainAudioFile,
+        rationalAudioFile: aud.rationalAudioFile,
+        explanationAudioFile: aud.explanationAudioFile,
+        devotionalAudioFile: aud.devotionalAudioFile,
+        introsAudioFile: aud.introsAudioFile,
+        mainAudioFileURL: aud.mainAudioURL,
+        rationalAudioFileURL: aud.rationalAudioURL,
+        explanationAudioFileURL: aud.explanationAudioURL,
+        devotionalAudioFileURL: aud.devotionalAudioURL,
+      })),
+    };
+    res.status(200).json(resp);
+  }
+});
 module.exports = {
   getChapters,
   getChaptersByBook,
   getChaptersByLanguage,
   getChapterByType,
   getChaptersByLanguageAndBook,
+  chapterAudios,
 };
