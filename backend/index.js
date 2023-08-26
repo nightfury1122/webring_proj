@@ -12,6 +12,7 @@ app.use("/api/books", require("./routes/bookRoutes"));
 app.use("/api/types", require("./routes/typesRoutes"));
 app.use("/api/movements", require("./routes/movementsRoutes"));
 app.use("/api/chapters", require("./routes/chapterRoutes"));
+app.use("/api/Data" , require("./routes/dataRoutes"))
 // app.use("/api/getMovementAudios", require("./routes/chapterRoutes"));
 // app.use("/api/getChaptersAudios", require("./routes/chapterRoutes"));
 // app.use("/api/getMovementAudios",require("./routes/"))
